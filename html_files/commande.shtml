@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Unsercure Iot Lamp</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button-ON {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .button-OFF {
+            background-color: transparent;
+            border: 2px solid #3498db;
+            color: #3498db;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        .title-button {
+            font-size: 25px;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1 0 auto;
+        }
+
+        .footer {
+            flex-shrink: 0;
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="/secureiotplus.png">
+</head>
+
+<body>
+    <div class="content">
+        <div id="commande">
+            <h1 class="title-button">Lamp control</h1></br>
+            <h2><!--#devname--></h2>
+            <a href="/led.cgi?led=1"><button class="button button-ON" onclick="document.getElementById('myImage').src='ON.jpg'">LED ON</button></a>
+            <img id="myImage" src="OFF.jpg" style="width:100px">
+            <a href="/led.cgi?led=0"><button class="button button-OFF" onclick="document.getElementById('myImage').src='OFF.jpg'">LED OFF</button></a>
+            <br>
+            <br>
+            <a href="/led.cgi?led=0"><button>Reset</button></a></br></br></br>
+            <a href="/index.shtml"><button>Logout</button></a>
+        </div>
+        
+        <div>
+            <form onsubmit="saveDeviceName(); return false;">
+                <div class="form-group">
+                    <label for="devicename">Device Name: </label>
+                    <input type="text" id="devicename" name="devicename" required>
+                </div>
+                <button type="submit">Save</button>
+            </form> <br><br>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="babouin_tech.ico" height="32px" />
+        <img src="secureiotplus.ico" height="32px" />
+        © 2023 Copyright SomeCompany, All right reserved
+        <a href="https://github.com/eMachabee/UnsecureIotLamp">Github</a>
+    </div>
+
+</body>
+<script>
+    var queryString = window.location.search;
+    if (queryString !== "") {
+    var params = new URLSearchParams(window.location.search);
+    var param1 = params.get('led');
+    if ( param1 == 1 )  
+    {
+        document.getElementById('myImage').src='ON.jpg';
+    } 
+    
+    }
+</script>
+<script>
+    function saveDeviceName() {
+        var nom = document.getElementById('devicename').value;
+        var url = "/save.cgi?name=" + nom;
+        window.location.href = url;
+    }
+</script>
+</html>
